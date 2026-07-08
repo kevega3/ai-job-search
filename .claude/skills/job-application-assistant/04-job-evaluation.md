@@ -1,6 +1,6 @@
 # Job Evaluation Framework
 
-<!-- SETUP: Skill match areas and career goals are personalized by running /setup -->
+<!-- Partially personalized from CV PDF. Career-motivation and behavioral sections still need interview input. -->
 
 ## Scoring Dimensions
 
@@ -16,9 +16,9 @@ How well do the required/preferred skills align with the candidate's capabilitie
 | 40-59 | Partial match, significant upskilling needed |
 | 0-39 | Fundamental mismatch |
 
-**Strong match areas:** [YOUR_PRIMARY_SKILLS]
-**Moderate match areas:** [YOUR_SECONDARY_SKILLS]
-**Weak match areas:** [SKILLS_YOU_LACK]
+**Strong match areas:** C#, .NET, Azure, SQL Server, React, Full Stack development, backend APIs, CI/CD, Azure DevOps, HealthTech interoperability, HL7 FHIR
+**Moderate match areas:** Next.js, Node.js, Blazor, MySQL, MongoDB, Docker, Node-RED, automated testing, Scrum
+**Weak match areas:** Any stack or domain not evidenced in the CV should be treated as a gap until confirmed
 
 ### 2. Experience Match (0-100)
 Does work history align with what they're looking for?
@@ -30,9 +30,9 @@ Does work history align with what they're looking for?
 | 40-59 | Adjacent experience, would need to make the case |
 | 0-39 | Unrelated experience |
 
-**Strong:** [YOUR_DIRECT_EXPERIENCE_DOMAINS]
-**Moderate:** [YOUR_ADJACENT_EXPERIENCE]
-**Entry-level:** [ROLES_WITH_LIMITED_EXPERIENCE]
+**Strong:** Software development roles using Microsoft stack, backend/API work, Azure deployments, SQL Server, React-based full stack work, HealthTech / clinical interoperability
+**Moderate:** General JavaScript full stack roles, DevOps-adjacent roles, distributed systems integration
+**Entry-level:** Roles demanding people management, extensive architecture ownership, or unverified niche stacks
 
 ### 3. Behavioral/Culture Fit (0-100)
 Does the role and company culture match the behavioral profile?
@@ -44,13 +44,20 @@ Does the role and company culture match the behavioral profile?
 | 40-59 | Some friction areas |
 | 0-39 | Significant culture mismatch |
 
-**Red flags to research:** Department disorganization, work dominated by maintenance over development, poor chemistry with leadership, culture mismatches. Check reviews, media coverage, LinkedIn connections, and network contacts for insider perspective.
+**Red flags to research:** Department disorganization, heavy maintenance with little product development, unclear engineering ownership, unrealistic on-call expectations, or strong soft-skill claims the CV cannot support yet.
 
 ### 4. Location & Logistics (Pass/Fail + Notes)
-- Within commute range: PASS
-- Remote with occasional office: PASS
-- Requires relocation: FAIL (deal-breaker)
-- Frequent international travel: FLAG (discuss with user)
+- Fully remote roles: PASS
+- Hybrid in Bogotá: PASS
+- Hybrid outside Bogotá: FAIL unless the user explicitly approves it
+- On-site outside Bogotá: FAIL unless compensation clearly justifies it and the user approves it
+- Requires relocation outside Bogotá: FLAG for user confirmation
+- Frequent international travel: FLAG for user confirmation
+
+### 4A. Language Filter (Pass/Fail)
+- Spanish-only roles: PASS
+- Vacancies where English is optional or only "nice to have": FLAG for manual review
+- Vacancies requiring conversational English, advanced English, fluent English, or bilingual Spanish-English: FAIL
 
 ### 5. Career Alignment & Motivation (0-100)
 Does this role advance career goals and contain tasks that energize?
@@ -63,19 +70,25 @@ Does this role advance career goals and contain tasks that energize?
 | 0-39 | Dead end or backwards step |
 
 **Career goals:**
-- [YOUR_CAREER_GOAL_1]
-- [YOUR_CAREER_GOAL_2]
-- [YOUR_CAREER_GOAL_3]
+- Increase compensation above the current 4.000.000 COP monthly salary
+- Continue growing in software engineering roles using .NET / Azure / SQL Server and modern full stack tools
+- Prefer fully remote opportunities or hybrid opportunities only in Bogotá
 
-**Motivation filter:** Evaluate not just whether you *can* do the tasks, but whether the tasks will *energize* you. Consider:
-- Tasks that energize: [YOUR_ENERGIZING_TASKS]
-- Tasks that drain: [YOUR_DRAINING_TASKS]
-- Non-task factors: leadership style, department culture, company values, degree of autonomy
+**Motivation filter:** Evaluate not just whether the candidate *can* do the tasks, but whether the tasks likely build on the verified strengths below.
+- Tasks likely aligned with verified strengths: Full Stack delivery, backend/API development, Azure deployment, SQL optimization, interoperability/integration work, quality-focused engineering
+- Tasks that require confirmation: leadership preference, consulting-heavy stakeholder work, people management, sales-facing responsibilities
+- Non-task factors: leadership style, department culture, company values, and autonomy still need user input
 
 **Life situation alignment:** Consider personal constraints:
-- **Security**: [YOUR_FINANCIAL_SITUATION_CONTEXT]
-- **Flexibility**: [YOUR_SCHEDULE_CONSTRAINTS]
-- **Professional development**: [YOUR_GROWTH_PRIORITIES]
+- **Security**: Prioritize roles paying above 4.000.000 COP monthly
+- **Flexibility**: Prefer fully remote roles, or hybrid roles only in Bogotá
+- **Professional development**: Likely aligned with Microsoft/.NET, cloud, full stack, and HealthTech-related growth based on the CV
+
+### 6A. Hard Filters Before Recommending Apply
+- Salary should be above 4.000.000 COP monthly when compensation is disclosed
+- Virtual roles should be prioritized; hybrid roles are acceptable only in Bogotá
+- Any role requiring relocation outside Bogotá should be treated as lower priority unless compensation clearly justifies it
+- Any role requiring English or bilingual fluency should be discarded
 
 ### 6. Salary Benchmark (Optional)
 

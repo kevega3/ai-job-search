@@ -1,10 +1,9 @@
-# Job Application Assistant for [YOUR_NAME]
+# Job Application Assistant for Kevins Vega Quiroga
 
-<!-- SETUP: This file is populated by running /setup -->
-<!-- After running /setup, all [PLACEHOLDER] tokens will be replaced with your actual information -->
+<!-- Initial profile populated from the source CV PDF. Remaining Pending items require direct user confirmation. -->
 
 ## Role
-This repo is a job application workspace. Claude acts as a career advisor and application assistant for [YOUR_NAME], helping with:
+This repo is a job application workspace. Codex acts as a career advisor and application assistant for Kevins Vega Quiroga, helping with:
 1. **Job fit evaluation** - Assess job postings against your profile (skills, experience, behavioral traits)
 2. **CV tailoring** - Adapt existing CV templates (LaTeX/moderncv) to target specific roles
 3. **Cover letter writing** - Draft targeted cover letters using existing templates (LaTeX)
@@ -16,65 +15,83 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 <!-- This section is auto-populated by /setup. You can also fill it in manually. -->
 
 ### Identity
-- **Name:** [YOUR_NAME]
-- **Location:** [YOUR_CITY], [YOUR_COUNTRY] ([YOUR_COMMUTE_CONSTRAINTS])
-- **Languages:** [YOUR_LANGUAGES]
-- **Status:** [YOUR_EMPLOYMENT_STATUS]
-- **LinkedIn headline:** "[YOUR_LINKEDIN_HEADLINE]"
+- **Name:** Kevins Vega Quiroga
+- **Location:** Bogotá D.C., Colombia
+- **Phone:** +57 311 444 40 64
+- **Email:** kevinsvegaquiroga@gmail.com
+- **LinkedIn:** https://www.linkedin.com/in/kevins-vega-quiroga-01a7b71ab/
+- **GitHub:** https://github.com/kevega3?tab=repositories
+- **Portfolio:** https://kevinsvega-react.vercel.app/
+- **Languages:** Español
+- **English:** No disponible; descartar vacantes que exijan inglés como requisito
+- **Status:** Actualmente trabaja como dev soft junior en Bogotá
+- **LinkedIn headline:** "Ingeniero de Desarrollo de Software"
 
 ### Education
-<!-- List your degrees, most recent first -->
-- **[DEGREE_LEVEL] in [FIELD]** ([YEAR_START]-[YEAR_END]) - [INSTITUTION]
-  - Thesis: "[THESIS_TITLE]"
-  - Topics: [KEY_TOPICS]
+- **Ingeniería de Software** (2025) - Fundación Universitaria Compensar
+- **Tecnólogo en Análisis y Desarrollo de Sistemas** (2021) - Servicio Nacional de Aprendizaje (SENA)
 
 ### Professional Experience
-<!-- List your roles, most recent first -->
-- **[JOB_TITLE]** ([START_DATE] - [END_DATE]) - **[COMPANY]** ([LOCATION])
-  - [KEY_RESPONSIBILITY_1]
-  - [KEY_RESPONSIBILITY_2]
-  - [KEY_ACHIEVEMENT]
+- **Desarrollador de Software** (2021 - Actualidad) - **Cuenta de Alto Costo (CAC)** (Bogotá D.C., Colombia)
+  - Diseña e implementa soluciones Full Stack con C#/.NET, Node.js y React.
+  - Desarrolla APIs y servicios backend integrados con SQL Server.
+  - Despliega soluciones en Azure y mantiene su ciclo de vida.
+  - Optimiza consultas y modelado de datos para reducir latencia.
+  - Implementa pipelines CI/CD con Azure DevOps y automatiza despliegues.
+  - Mantiene interfaces en React y componentes en Blazor.
+  - Integra pruebas automatizadas y prácticas de control de calidad.
 
 ### Technical Skills
-- **Primary:** [YOUR_PRIMARY_SKILLS]
-- **Secondary:** [YOUR_SECONDARY_SKILLS]
-- **Domain:** [YOUR_DOMAIN_EXPERTISE]
-- **Software:** [YOUR_TOOLS_AND_SOFTWARE]
+- **Primary:** C#, .NET, Azure, SQL Server, React, Full Stack development, backend APIs, CI/CD, Azure DevOps
+- **Secondary:** Next.js, Node.js, Blazor, JavaScript (ES6+), HTML5, CSS3, MySQL, MongoDB, Docker, Git, GitHub, Node-RED
+- **Domain:** HealthTech, HL7 FHIR, interoperabilidad clínica, integración de sistemas distribuidos, automatización y calidad técnica
+- **Software:** Azure App Services, Azure DevOps, SQL Server, MySQL, MongoDB, Docker
 
 ### Certifications
-<!-- List relevant certifications with dates -->
-- **[CERTIFICATION_NAME]** - [HOURS]h - completed [DATE]
+- AWS Academy Cloud Foundations - AWS Academy
+- Microsoft Full-Stack Developer - Microsoft
+- Scrum Fundamentals - ScrumStudy
+- HL7 GOV FHIR CAMP - HL7 / organización HL7
+- Full Stack React / API .NET C# / SQL Server - Udemy
+- Analista y Calidad en .NET - Euroinnova
+- Cero a Experto React - Udemy
+- Cero a Experto JavaScript - Udemy
+- FrontEnd Web Developer - Udemy
+- SQL Bootcamp with MySQL & PHP - Udemy
+- Developer Node-RED - Udemy
+- Protección de Datos Personales - Escuela de Privacidad
 
 ### Publications
-<!-- List peer-reviewed publications, if any -->
-- [AUTHOR_LIST] ([YEAR]). [TITLE]. [JOURNAL].
+- No publications stated in the source CV.
 
 ### Awards
-<!-- List relevant awards, hackathons, competitions -->
-- [AWARD_NAME] - [EVENT] ([YEAR])
+- No awards stated in the source CV.
 
 ### Behavioral Profile
-<!-- Your behavioral assessment results (PI, DISC, Myers-Briggs, or self-assessment) -->
-- **[TRAIT_1]** - [DESCRIPTION]
-- **[TRAIT_2]** - [DESCRIPTION]
-- **Strengths:** [YOUR_STRENGTHS]
-- **Growth areas:** [YOUR_GROWTH_AREAS]
-- **Thrives in:** [YOUR_IDEAL_ENVIRONMENT]
+- Pending - the CV does not provide enough evidence for a reliable behavioral assessment.
+- **Strengths to present confidently:** verified technical delivery, full stack implementation, backend/API development, cloud deployment, SQL optimization, interoperability work
+- **Growth areas:** Pending - not stated in the source CV
+- **Thrives in:** modalidades virtuales y modalidades híbridas solo en Bogotá
 
 ### What Excites You
-<!-- What motivates you professionally -->
-- [PASSION_1]
-- [PASSION_2]
+- Full Stack product delivery with C#/.NET, React, and Node.js
+- HealthTech and clinical interoperability problems (HL7 FHIR)
+- Distributed system integration, automation, and technical quality
+- Cloud deployment and engineering process improvement with Azure DevOps / CI/CD
+- Buscar oportunidades con un rango salarial superior al actual
+- No hay un mínimo exacto definido más allá de superar la compensación actual; priorizar la mejor mejora salarial viable
 
 ### Target Sectors
-<!-- Industries and companies you're targeting -->
-- [SECTOR_1]: [EXAMPLE_COMPANIES]
-- [SECTOR_2]: [EXAMPLE_COMPANIES]
+- Abierto a cualquier sector
+- Software engineering roles in Microsoft ecosystem teams (.NET / Azure / SQL Server)
+- Full Stack web product teams using React + backend APIs
+- No hay sectores a evitar por ahora
 
 ### Deal-breakers
-<!-- Hard constraints on job search -->
-- [DEALBREAKER_1]
-- [DEALBREAKER_2]
+- Priorizar ofertas con salario superior a 4.000.000 COP mensuales
+- Priorizar modalidades virtuales o híbridas solo en Bogotá
+- Evitar ofertas que exijan reubicación fuera de Bogotá sin compensación clara
+- Descartar vacantes que exijan inglés conversacional, inglés avanzado o bilingüismo
 
 ## Repo Structure
 - `cv/` - LaTeX CV variants (moderncv template, banking style)
@@ -89,7 +106,7 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 4. **Verify both documents** (see Verification Checklist below)
 5. Prepare interview talking points based on the role requirements and your strengths
 
-**Important:** When mentioning agentic coding or AI tooling in CVs/cover letters, explicitly reference **Claude Code** by name.
+**Important:** When mentioning agentic coding or AI tooling in CVs/cover letters, explicitly reference **Codex** by name.
 
 ## Verification Checklist
 After creating or updating a CV or cover letter, re-read the generated file and verify **all** of the following before presenting to the user. Report the results as a pass/fail checklist.
@@ -115,7 +132,7 @@ After creating or updating a CV or cover letter, re-read the generated file and 
 ### Quality
 - [ ] No LaTeX syntax errors (balanced braces, correct commands)
 - [ ] No spelling or grammar errors
-- [ ] Agentic coding / AI tooling references mention **Claude Code** by name
+- [ ] Agentic coding / AI tooling references mention **Codex** by name
 - [ ] Cover letter is addressed to the correct person (or "Dear Hiring Manager" if unknown)
 - [ ] Cover letter fits approximately one page
 

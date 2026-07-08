@@ -1,9 +1,9 @@
----
-name: scrape
-description: >
-  Scrapes Danish job sites for new positions matching your profile. Deduplicates across runs.
-  Triggers on: job scrape, find jobs, search jobs, new jobs, job search, scrape jobs, /scrape
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(bun --version), Bash(bun run .agents/skills/*/cli/src/cli.ts *), WebFetch, WebSearch, Agent, AskUserQuestion
+# /scrape - Search for Matching Job Postings
+
+You are running the `/scrape` workflow for this repository.
+
+Follow the workflow below exactly.
+
 ---
 
 # Job Scraper
@@ -12,19 +12,19 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash(bun --version), Bash(bun run 
 
 ## How It Works
 
-This skill searches multiple Danish job sites using targeted queries based on your profile, deduplicates against previously seen jobs and the application tracker, and presents new matches with a quick fit assessment.
+This workflow searches multiple Danish job sites using targeted queries based on the candidate profile, deduplicates against previously seen jobs and the application tracker, and presents new matches with a quick fit assessment.
 
 ## Invocation
 
-The user triggers this skill by saying things like:
+The user triggers this workflow by saying things like:
 - "Find new jobs"
 - "Scrape for jobs"
 - "Any new positions?"
-- "/scrape"
+- `/scrape`
 
 Optional arguments:
-- A focus area, e.g. "/scrape data science" or "/scrape geophysics"
-- "broad" to run all search categories, e.g. "/scrape broad"
+- A focus area, e.g. `/scrape data science` or `/scrape geophysics`
+- `broad` to run all search categories, e.g. `/scrape broad`
 
 ---
 
@@ -41,11 +41,11 @@ Optional arguments:
 
 Read `search-queries.md` (this directory) for the search strategy. By default, run the top 3 priority query categories. If the user said "broad", run all categories. If the user specified a focus area (e.g. "data science"), prioritize queries from that category.
 
-**Use the installed CLI tools as the primary search mechanism.** Fall back to `WebSearch` only for portals that do not have a CLI skill, or if `bun` is unavailable on the system.
+Use the installed CLI tools as the primary search mechanism. Fall back to web search only for portals that do not have a CLI skill, or if `bun` is unavailable on the system.
 
 Before running any portal, consult `NETWORK_ACCESS.md`:
 - If a portal is marked blocked in this environment, skip it entirely.
-- Do not waste time trying its CLI and do not fall back to `WebSearch` for that same blocked portal.
+- Do not waste time trying its CLI and do not fall back to WebSearch for that same blocked portal.
 - Record the skip reason so you can mention it in Step 5.
 
 #### 1a. Check bun availability
@@ -58,7 +58,7 @@ If this fails (bun not installed), skip to **1c (WebSearch fallback)** for all p
 
 #### 1b. Run CLI tools (primary — run these in parallel where possible)
 
-Discover all installed portal CLI skills by reading every `SKILL.md` found under `.agents/skills/*/SKILL.md`. Each file documents that portal's exact CLI flags and usage examples. **Use each portal's own documented interface — do not guess flags.** This approach automatically includes any new portals added via `/add-portal` without requiring changes to this file.
+Discover all installed portal CLI skills by reading every `SKILL.md` found under `.agents/skills/*/SKILL.md`. Each file documents that portal's exact CLI flags and usage examples. Use each portal's own documented interface — do not guess flags. This approach automatically includes any new portals added via `/add-portal` without requiring changes to this file.
 
 For each installed portal skill that is not marked blocked in `NETWORK_ACCESS.md`:
 
@@ -68,7 +68,7 @@ For each installed portal skill that is not marked blocked in `NETWORK_ACCESS.md
 4. Cap results to ~20 per call using the portal's limit flag.
 5. Use `--format json` for machine-readable output.
 
-Run all portal CLI calls in parallel where possible using the Agent tool. Collect all `results` arrays into a single pool for Step 2.
+Run all portal CLI calls in parallel where possible. Collect all `results` arrays into a single pool for Step 2.
 
 If a CLI tool exits with a non-zero code, log the error message and continue — do not abort the whole search.
 
@@ -76,30 +76,30 @@ If the failure matches a known access block documented in `NETWORK_ACCESS.md` (f
 
 #### 1c. WebSearch fallback
 
-Use `WebSearch` for:
+Use WebSearch for:
 - Portals listed in `search-queries.md` that do **not** have a corresponding directory under `.agents/skills/`
 - Any portal whose CLI fails at runtime
 - When bun is unavailable (Step 1a failed)
 
 Use the site-specific query strings from `search-queries.md` directly as WebSearch queries for these portals.
 
-Never use `WebSearch` fallback for a portal already marked blocked in `NETWORK_ACCESS.md`.
+Never use WebSearch fallback for a portal already marked blocked in `NETWORK_ACCESS.md`.
 
 ### Step 2: Fetch & Parse
 
 For each promising result from Step 1:
-- Use `WebFetch` to retrieve the job posting page
+- Use WebFetch to retrieve the job posting page
 - Extract: **job title**, **company**, **location**, **posting date** (or "recent"), **URL**, **key requirements** (brief), **application deadline** (if listed)
 - Skip if the URL or company+title combo already exists in `seen_jobs.json`
 - Skip if the company+role already appears in `job_search_tracker.csv`
 
 ### Step 3: Quick Fit Assessment
 
-For each new job, do a rapid fit check (NOT the full evaluation from `04-job-evaluation.md` - just a quick signal):
+For each new job, do a rapid fit check (not the full evaluation from `04-job-evaluation.md` - just a quick signal):
 
-- **High match**: Role directly involves your core skills
-- **Medium match**: Role is adjacent to your experience
-- **Low match**: Role requires significant skills you lack
+- **High match**: Role directly involves the candidate's core skills
+- **Medium match**: Role is adjacent to the candidate's experience
+- **Low match**: Role requires significant skills the candidate lacks
 
 ### Step 4: Deduplicate & Store
 
@@ -124,7 +124,7 @@ For each new job, do a rapid fit check (NOT the full evaluation from `04-job-eva
 
 Present new jobs in a table sorted by fit (high first):
 
-```
+```text
 ## New Job Matches - YYYY-MM-DD
 
 Found X new positions (Y high, Z medium, W low match).
@@ -135,7 +135,7 @@ Found X new positions (Y high, Z medium, W low match).
 
 ### High-Match Highlights
 For each high-match job, add 2-3 bullet points:
-- Why it matches your profile
+- Why it matches the profile
 - Key requirements to check
 - Any red flags
 
@@ -147,7 +147,7 @@ For each high-match job, add 2-3 bullet points:
 After presenting, ask:
 > "Want me to evaluate any of these in detail? Just give me the number(s)."
 
-If the user picks a number, invoke the **job-application-assistant** skill workflow (fit evaluation first, then CV + cover letter if approved).
+If the user picks a number, invoke the job-application-assistant workflow (fit evaluation first, then CV + cover letter if approved).
 
 If the run found many new jobs (roughly 8+), also suggest `/rank` - it batch-scores all new postings against the full fit framework and returns a ranked shortlist, which beats eyeballing a long table. (`/rank` sets the `ranked` and `expired` status values in `seen_jobs.json`; treat both as already-seen for dedup purposes.)
 
@@ -159,9 +159,9 @@ If the user decides to apply to any job, add a row to `job_search_tracker.csv`.
 
 ## Important Rules
 
-1. **Never fabricate job postings.** Only present jobs found via actual WebSearch/WebFetch results.
-2. **Respect deduplication.** Always check seen_jobs.json AND job_search_tracker.csv before presenting.
-3. **Focus on configured geographic area.** Skip jobs that require relocation or are clearly outside commute range.
-4. **Only open positions.** Skip postings with expired deadlines or those marked as closed.
-5. **Be efficient with WebFetch.** Don't fetch every search result - use titles and snippets to pre-filter before fetching.
-6. **Parallel searches.** Use the Agent tool or parallel WebSearch calls to speed up the search phase.
+1. Never fabricate job postings. Only present jobs found via actual CLI/WebSearch/WebFetch results.
+2. Respect deduplication. Always check `seen_jobs.json` AND `job_search_tracker.csv` before presenting.
+3. Focus on configured geographic area. Skip jobs that require relocation or are clearly outside commute range.
+4. Only open positions. Skip postings with expired deadlines or those marked as closed.
+5. Be efficient with WebFetch. Don't fetch every search result - use titles and snippets to pre-filter before fetching.
+6. Prefer parallel search where safe, but keep output grounded in real fetched results.

@@ -1,60 +1,76 @@
 # Candidate Profile
 
-<!-- SETUP: This file is populated by running /setup -->
-<!-- After running /setup, all sections will be filled with your actual information -->
+<!-- Populated from CV PDF: ` cv/CV-KevinsVega.pdf` -->
 
 ## Identity
-- **Name:** [YOUR_NAME]
-- **Location:** [YOUR_ADDRESS]
-- **Phone:** [YOUR_PHONE]
-- **Email:** [YOUR_EMAIL]
-- **LinkedIn:** [YOUR_LINKEDIN_URL]
-- **GitHub:** [YOUR_GITHUB_URL]
-- **Languages:** [YOUR_LANGUAGES with proficiency levels]
-- **Status:** [YOUR_EMPLOYMENT_STATUS]
-- **Constraints:** [YOUR_COMMUTE_OR_LOCATION_CONSTRAINTS]
+- **Name:** Kevins Vega Quiroga
+- **Location:** Bogotá D.C., Colombia
+- **Phone:** +57 311 444 40 64
+- **Email:** kevinsvegaquiroga@gmail.com
+- **LinkedIn:** https://www.linkedin.com/in/kevins-vega-quiroga-01a7b71ab/
+- **GitHub:** https://github.com/kevega3?tab=repositories
+- **Portfolio:** https://kevinsvega-react.vercel.app/
+- **Languages:** Español
+- **English:** No disponible; no aplicar a vacantes con requisito de inglés
+- **Status:** Actualmente trabaja como dev soft junior en Bogotá
+- **Compensación actual:** 4.000.000 COP mensuales
+- **Objetivo salarial:** Buscar ofertas con salario superior al actual; sin mínimo exacto definido más allá de mejorar la compensación vigente
+- **Preferred work modes:** Virtual o híbrida solo en Bogotá
+- **Constraints:** Vive en Bogotá D.C., Colombia; prefiere ofertas virtuales o modalidades híbridas solo en Bogotá, prioriza mejora salarial y debe descartarse cualquier vacante que exija inglés
 
 ## Education
 
 | Degree | Period | Institution | Key Topics |
 |--------|--------|-------------|------------|
-| [DEGREE] | [YEARS] | [INSTITUTION] | [TOPICS] |
+| Ingeniería de Software | 2025 | Fundación Universitaria Compensar | Software engineering |
+| Tecnólogo en Análisis y Desarrollo de Sistemas | 2021 | Servicio Nacional de Aprendizaje (SENA) | Systems analysis and development |
 
 ## Professional Experience
 
-### [JOB_TITLE] - [COMPANY] ([START] - [END])
-[LOCATION]
-- [RESPONSIBILITY_OR_ACHIEVEMENT_1]
-- [RESPONSIBILITY_OR_ACHIEVEMENT_2]
-- [RESPONSIBILITY_OR_ACHIEVEMENT_3]
-
-<!-- Add more roles as needed -->
+### Desarrollador de Software - Cuenta de Alto Costo (CAC) (2021 - Actualidad)
+Bogotá D.C., Colombia
+- Diseñó e implementó soluciones Full Stack con C#/.NET, Node.js y React.
+- Desplegó soluciones en Azure y dio mantenimiento a su ciclo de vida.
+- Desarrolló APIs y servicios backend integrados con SQL Server.
+- Optimizó consultas y modelado de datos para reducción de latencia.
+- Implementó pipelines CI/CD con Azure DevOps y automatización de despliegues.
+- Desarrolló y mantuvo interfaces en React y componentes en Blazor.
+- Integró pruebas automatizadas y prácticas de control de calidad.
 
 ## Independent Projects
-<!-- Projects outside of employment: freelance, open source, personal -->
-- **[PROJECT_NAME]**: [DESCRIPTION]
+- **Portfolio website:** Personal site at `https://kevinsvega-react.vercel.app/`.
+- **GitHub repositories:** Public code at `https://github.com/kevega3?tab=repositories`.
 
 ## Technical Skills
 
 ### Programming & ML
-- **[LANGUAGE]** ([PROFICIENCY]): [FRAMEWORKS_AND_LIBRARIES]
-- [OTHER_SKILLS]
+- **C# / .NET:** .NET, Blazor, backend APIs, full stack development
+- **JavaScript:** React, Next.js, Node.js, JavaScript (ES6+)
+- **Web:** HTML5, CSS3
 
 ### Domain Expertise
-- [DOMAIN_1]
-- [DOMAIN_2]
+- HealthTech
+- Interoperabilidad clínica (HL7 FHIR)
+- Integración de sistemas distribuidos
+- Automatización, optimización y calidad técnica
 
 ### Software & Tools
-- [TOOL_LIST]
+- SQL Server, MySQL, MongoDB
+- Azure (App Services, DevOps)
+- Docker
+- Azure DevOps, CI/CD
+- Git, GitHub
+- Node-RED
+- Testing automatizado
+- Documentación técnica
+- Metodologías ágiles (Scrum)
 
 ## Publications
-<!-- List peer-reviewed publications, if any -->
-1. [AUTHOR_LIST] ([YEAR]). [TITLE]. [JOURNAL]. [DOI_LINK]
+None stated in the CV.
 
 ## Awards
-- [AWARD] - [EVENT] ([YEAR])
+None stated in the CV.
 
 ## References
-- [NAME], [TITLE], [COMPANY] ([EMAIL], [PHONE])
-
+Not included in the CV.
 More references available upon request.

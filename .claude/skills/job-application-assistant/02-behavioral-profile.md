@@ -1,50 +1,44 @@
 # Behavioral Profile
 
-<!-- SETUP: This file is populated by running /setup -->
-<!-- You can use results from PI, DISC, Myers-Briggs, StrengthsFinder, or a self-assessment -->
+<!-- Initial placeholder profile. The CV alone does not provide enough evidence for a real behavioral assessment. -->
 
 ## Overview
-[YOUR_NAME]'s behavioral assessment identifies them as a **[PROFILE_TYPE]** pattern. [1-2 SENTENCE_SUMMARY].
+No formal behavioral profile is available yet. The current CV provides technical history and credentials, but not enough evidence to score behavioral drives, work-environment preferences, growth areas, or management-style fit reliably.
 
 ## Core Behavioral Drives
 
 | Drive | Level | Meaning |
 |-------|-------|---------|
-| [DRIVE_1] | [LEVEL] | [DESCRIPTION] |
-| [DRIVE_2] | [LEVEL] | [DESCRIPTION] |
-| [DRIVE_3] | [LEVEL] | [DESCRIPTION] |
-| [DRIVE_4] | [LEVEL] | [DESCRIPTION] |
+| Dominance | Pending | Requires interview or assessment data |
+| Extraversion | Pending | Requires interview or assessment data |
+| Patience | Pending | Requires interview or assessment data |
+| Formality | Pending | Requires interview or assessment data |
 
 ## Strongest Behaviors
-- **[BEHAVIOR_1]:** [DESCRIPTION]
-- **[BEHAVIOR_2]:** [DESCRIPTION]
-- **[BEHAVIOR_3]:** [DESCRIPTION]
+- Pending - gather through setup interview or self-assessment.
 
 ## How You Work Best
-- [ENVIRONMENT_PREFERENCE_1]
-- [ENVIRONMENT_PREFERENCE_2]
-- [ENVIRONMENT_PREFERENCE_3]
+- Pending - not stated in the CV.
 
 ## Growth Areas (frame positively in applications)
-- **[AREA_1]:** [HOW_TO_FRAME_IT_POSITIVELY]
-- **[AREA_2]:** [HOW_TO_FRAME_IT_POSITIVELY]
+- Pending - not stated in the CV.
 
 ## Mapping to Job Posting Language
 
-When a job posting mentions these keywords, it's a **strong behavioral fit**:
-- [KEYWORD_OR_PHRASE_THAT_MATCHES_YOUR_STYLE]
-- [ANOTHER_KEYWORD]
+When a job posting mentions these keywords, defer judgment until a behavioral interview is completed:
+- autonomy
+- leadership style
+- ambiguity tolerance
 
-When a job posting mentions these, flag as **potential friction** (not deal-breaker):
-- [KEYWORD_OR_PHRASE_THAT_MIGHT_CLASH]
-- [ANOTHER_KEYWORD]
+When a job posting mentions these, flag for manual review:
+- high-pressure stakeholder management
+- team leadership expectations
 
 ## Management Style Preferences
-- [WHAT_MANAGEMENT_STYLE_WORKS_FOR_YOU]
-- [WHAT_DOESN'T_WORK]
+- Pending - not stated in the CV.
 
 ## Using This in Applications
-- **Cover letters:** [HOW_TO_WEAVE_IN_BEHAVIORAL_STRENGTHS]
-- **CV:** [WHAT_TO_EMPHASIZE]
-- **Interviews:** [WHAT_STAR_EXAMPLES_TO_USE]
-- **Don't overstate:** [WHAT_NOT_TO_CLAIM]
+- **Cover letters:** Avoid over-claiming soft skills until confirmed.
+- **CV:** Emphasize verified technical strengths and delivery experience.
+- **Interviews:** Gather STAR stories before making strong behavioral claims.
+- **Don't overstate:** leadership, mentoring, communication style, or culture preferences not evidenced in the CV.
