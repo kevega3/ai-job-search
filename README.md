@@ -10,6 +10,17 @@ An AI-powered job application framework built on [OpenAI Codex](https://github.c
 
 > Note: This is an independent open-source project. The repository still contains historical `.claude/` and `CLAUDE.md` paths for backwards compatibility, but the runtime workflow in this fork is adapted for Codex.
 
+## Current fork status
+
+This fork is no longer just a straight Claude Code-era template. The following changes are already implemented in the repository:
+
+- Codex migration completed via `tools/run_codex_workflow.py` and `bin/*` wrappers.
+- Candidate profile files were populated from a real CV instead of placeholders.
+- Job-search evaluation now supports real-world filters such as salary growth, remote-only / hybrid-in-Bogotá preference, and excluding roles that require English.
+- Blocked portals are documented in [NETWORK_ACCESS.md](NETWORK_ACCESS.md) and skipped automatically during scrape workflows.
+- LinkedIn guest search is actively usable in this environment and is the main source for country-agnostic searches.
+- Application tracking is persisted in `job_search_tracker.csv`, and long-form review reports can be saved under `reports/`.
+
 <p align="center">
   <a href="https://ko-fi.com/madslorentzen">
     <img src="https://storage.ko-fi.com/cdn/kofi3.png?v=6" alt="Buy me a coffee at ko-fi.com" height="40">
@@ -97,6 +108,12 @@ For `linkedin-search` the install is optional: it has zero runtime dependencies 
 This searches multiple job portals for positions matching your profile, deduplicates results, and presents them sorted by fit. Pick a match to run `./bin/apply` on it directly — or, when a scrape returns more jobs than you want to eyeball, run `./bin/rank` to batch-score them all against the fit framework and get a ranked shortlist first.
 
 If a supported portal is currently blocked in this environment, the scrape workflow should skip it automatically instead of wasting time retrying it.
+
+The evaluation framework can also reject jobs before recommendation when they conflict with user constraints already stored in the profile, for example:
+
+- roles that require English when the candidate is Spanish-only
+- hybrid roles outside Bogotá
+- compensation that does not improve on the candidate's current salary when salary is disclosed
 
 ### 5. Apply to a job
 
@@ -188,10 +205,28 @@ ai-job-search/
 │   ├── run_codex_workflow.py          # Codex runner for the workflow specs in .claude/commands/
 │   └── README_SALARY_TOOL.md          # Salary tool setup instructions
 ├── job_scraper/                       # Scraper state (seen jobs, results)
+├── reports/                           # Saved review/ranking reports for job batches
 ├── upskill/                           # ./bin/upskill report output (markdown reports per run)
 ├── job_search_tracker.csv             # Application tracking spreadsheet
 └── SETUP.md                           # Detailed setup guide
 ```
+
+## Tracking applications and review batches
+
+The repository now supports two lightweight tracking artifacts:
+
+- `job_search_tracker.csv` stores the operational table for roles you are reviewing or applying to.
+- `reports/` can store markdown summaries for larger review batches, such as a ranked list of 50 scraped openings with per-job notes.
+
+Recommended status flow in `job_search_tracker.csv`:
+
+- `pendiente a revisar`
+- `priorizada`
+- `postulada`
+- `entrevista`
+- `rechazada`
+- `oferta`
+- `cerrada`
 
 ## Codex compatibility layer
 
@@ -239,17 +274,18 @@ If you prefer editing files directly instead of using `./bin/setup`:
 | `04-job-evaluation.md` | Skill match areas, career goals, motivation filters |
 | `05-cv-templates.md` | Profile statement templates for different role types |
 | `07-interview-prep.md` | Your STAR examples from actual experience |
-| `search-queries.md` | Job search queries for your skills and location |
+| `job_search_tracker.csv` | Operational tracker for reviewed/applied jobs |
+| `NETWORK_ACCESS.md` | Portal accessibility matrix and blocked-site guidance |
 
-### Updating your search queries
+### Updating your search focus
 
-As your priorities evolve, you can reconfigure just the job search without re-running the full profile setup:
+As your priorities evolve, update the profile and evaluation files that drive search decisions:
 
-```
-./bin/setup --section search
-```
+- `CLAUDE.md`
+- `.claude/skills/job-application-assistant/01-candidate-profile.md`
+- `.claude/skills/job-application-assistant/04-job-evaluation.md`
 
-This re-runs the search configuration interview: which roles to target, which skills to search for, which locations, and which portals. It also suggests role types you may not have considered based on your profile.
+Those files now hold the practical constraints used during triage, such as language exclusion, salary direction, and remote/hybrid preferences.
 
 ### LaTeX templates
 
