@@ -1,0 +1,17 @@
+{
+  "name": "empleo-cli",
+  "version": "1.0.0",
+  "description": "CLI for searching jobs on Empleo.com",
+  "type": "module",
+  "main": "src/cli.js",
+  "bin": {
+    "empleo-search": "src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "node --test",
+    "typecheck": "node --check src/cli.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

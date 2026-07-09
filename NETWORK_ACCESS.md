@@ -2,18 +2,20 @@
 
 This file documents the external sites and endpoints the repository needs for job-search workflows, plus their observed accessibility from this environment.
 
-Last verified: 2026-07-08
+Last verified: 2026-07-09
 Environment: WSL / current Hermes session
 
 ## Summary
 
 | Portal / Site | Used for | Endpoint pattern | Status from this environment | Impact | Workaround |
 |---|---|---|---|---|---|
-| Jobindex | Search + job detail | `https://www.jobindex.dk/jobsoegning?...` and `https://www.jobindex.dk/jobannonce/<id>` | Reachable | Jobindex workflows should work | None needed |
-| Jobdanmark | Search API | `https://jobdanmark.dk/api/jobsearch/search/<page>` | Reachable | Jobdanmark workflows should work | None needed |
-| Jobnet | Search + job detail API | `https://jobnet.dk/bff/FindJob/...` | Reachable | Jobnet workflows should work | None needed |
-| LinkedIn guest jobs | Public guest search/detail | `https://www.linkedin.com/jobs-guest/jobs/api/...` | Reachable | LinkedIn guest search should work | None needed |
-| Jobbank | RSS/job lookup | `https://jobbank.dk/job/rss?...` and `https://jobbank.dk/job/...` | Blocked | `jobbank-search` is currently unusable or unreliable | Skip Jobbank, rely on Jobindex/Jobdanmark/Jobnet/LinkedIn, or paste the job text manually into `./bin/apply` |
+| LinkedIn guest jobs | Public guest search/detail | `https://www.linkedin.com/jobs-guest/jobs/api/...` | Reachable | LinkedIn workflows work | None needed |
+| Empleo.com | Search + RSS + job detail | `https://empleo.com/jobs`, `https://empleo.com/jobs.rss`, `https://empleo.com/jobs/<slug>` | Reachable, but RSS can reset intermittently | Empleo.com workflows are usable with retries | Use retry/backoff; fall back from RSS to `/jobs` when needed |
+| Computrabajo Colombia | Search + job detail | `https://co.computrabajo.com/trabajo-de-<slug>` and `https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-<slug>` | Guarded / intermittently reachable | Computrabajo workflows should be best-effort only | Use conservative access, low volume, and graceful blocked-site handling |
+| Jobindex | Search + job detail | `https://www.jobindex.dk/jobsoegning?...` and `https://www.jobindex.dk/jobannonce/<id>` | Reachable | Legacy Denmark workflows still work | None needed |
+| Jobdanmark | Search API | `https://jobdanmark.dk/api/jobsearch/search/<page>` | Reachable | Legacy Denmark workflows still work | None needed |
+| Jobnet | Search + job detail API | `https://jobnet.dk/bff/FindJob/...` | Reachable | Legacy Denmark workflows still work | None needed |
+| Jobbank | RSS/job lookup | `https://jobbank.dk/job/rss?...` and `https://jobbank.dk/job/...` | Blocked | `jobbank-search` is currently unusable or unreliable | Skip Jobbank, rely on other portals, or paste the job text manually into `./bin/apply` |
 
 ## Verified blocked site
 
@@ -34,50 +36,42 @@ Practical effect:
 
 Recommended workaround:
 - Do not rely on Jobbank in this environment.
-- Use the other supported portals instead.
+- Use Empleo.com, Computrabajo, LinkedIn guest, Jobindex, Jobdanmark, and Jobnet instead.
 - If a posting only exists on Jobbank, open it manually in a browser and paste the full job text into `./bin/apply`.
 
 ## Verified reachable sites
 
-### Jobindex
+### Empleo.com
 
 Used by:
-- `.agents/skills/jobindex-search/cli/src/helpers.ts`
-- `.agents/skills/jobindex-search/cli/src/commands/search.ts`
+- `.agents/skills/empleo-search/cli/src/helpers.js`
+- `.agents/skills/empleo-search/cli/src/search.js`
+- `.agents/skills/empleo-search/cli/src/detail.js`
 
-Verified endpoint:
-- `https://www.jobindex.dk/jobsoegning?q=python&page=1&jobage=14&sort=date`
+Verified endpoints:
+- `https://empleo.com/jobs`
+- `https://empleo.com/jobs.rss`
+- `https://empleo.com/jobs?q=desarrollador%20.net&remote=1`
 
 Observed result:
 - HTTP `200`
+- RSS can occasionally reset; the CLI should retry with backoff.
 
-### Jobdanmark
+### Computrabajo Colombia
 
 Used by:
-- `.agents/skills/jobdanmark-search/cli/src/helpers.ts`
-- `.agents/skills/jobdanmark-search/cli/src/commands/search.ts`
+- `.agents/skills/computrabajo-search/cli/src/helpers.js`
+- `.agents/skills/computrabajo-search/cli/src/search.js`
+- `.agents/skills/computrabajo-search/cli/src/detail.js`
 
-Verified endpoint:
-- `https://jobdanmark.dk/api/jobsearch/search/1`
+Verified endpoints:
+- `https://co.computrabajo.com/`
+- `https://co.computrabajo.com/trabajo-de-desarrollador-net`
+- `https://co.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-desarrollador-backend-net-8-remoto-proyecto-freelance-900-horas-en-bogota-dc-E5589101CF919F2D61373E686DCF3405`
 
 Observed result:
 - HTTP `200`
-
-### Jobnet
-
-Used by:
-- `.agents/skills/jobnet-search/cli/src/helpers.ts`
-- `.agents/skills/jobnet-search/cli/src/commands/search.ts`
-- `.agents/skills/jobnet-search/cli/src/commands/detail.ts`
-
-Verified endpoint:
-- `https://jobnet.dk/bff/FindJob/Search?resultsPerPage=1&pageNumber=1&orderType=PublicationDate&searchString=python`
-
-Observed result:
-- HTTP `200`
-
-Note:
-- A test against a fake detail ID returned `404`, which is expected for a nonexistent posting and is not a network block.
+- Access is guarded/intermittent and can vary with headers or request behavior.
 
 ### LinkedIn guest jobs
 
@@ -93,7 +87,8 @@ Observed result:
 ## Operational guidance
 
 If you are running `./bin/scrape` in this environment:
-- Expect Jobindex, Jobdanmark, Jobnet, and LinkedIn guest search to be usable.
+- Expect Empleo.com and LinkedIn guest search to be usable.
+- Expect Computrabajo to be usable only with conservative access and graceful fallback.
 - Expect Jobbank to be blocked.
 - Prefer the non-Jobbank portals when troubleshooting missing results.
 

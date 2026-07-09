@@ -12,7 +12,7 @@ Follow the workflow below exactly.
 
 ## How It Works
 
-This workflow searches multiple Danish job sites using targeted queries based on the candidate profile, deduplicates against previously seen jobs and the application tracker, and presents new matches with a quick fit assessment.
+This workflow searches multiple job sites using targeted queries based on the candidate profile, deduplicates against previously seen jobs and the application tracker, and presents new matches with a quick fit assessment.
 
 ## Invocation
 
@@ -23,8 +23,8 @@ The user triggers this workflow by saying things like:
 - `/scrape`
 
 Optional arguments:
-- A focus area, e.g. `/scrape data science` or `/scrape geophysics`
-- `broad` to run all search categories, e.g. `/scrape broad`
+- A focus area, e.g. `/scrape data science` or `/scrape .net`
+- `broad` to run all search categories
 
 ---
 
@@ -35,67 +35,58 @@ Optional arguments:
 1. Read `job_scraper/seen_jobs.json` (create if missing - start with `{"seen": {}}`)
 2. Read `job_search_tracker.csv` to extract already-applied companies+roles
 3. Read `search-queries.md` (this directory) for the search strategy
-4. Read `NETWORK_ACCESS.md` to detect portals that are currently blocked from this environment
+4. Read `NETWORK_ACCESS.md` to detect portals that are currently blocked or guarded in this environment
 
 ### Step 1: Search
 
-Read `search-queries.md` (this directory) for the search strategy. By default, run the top 3 priority query categories. If the user said "broad", run all categories. If the user specified a focus area (e.g. "data science"), prioritize queries from that category.
+Read `search-queries.md` (this directory) for the search strategy. By default, run the top 3 priority query categories. If the user said `broad`, run all categories. If the user specified a focus area, prioritise queries from that category.
 
-Use the installed CLI tools as the primary search mechanism. Fall back to web search only for portals that do not have a CLI skill, or if `bun` is unavailable on the system.
+Use the installed CLI tools as the primary search mechanism. Fall back to web search only for portals that do not have a CLI skill, or if the local runtime cannot execute the portal CLI.
 
 Before running any portal, consult `NETWORK_ACCESS.md`:
-- If a portal is marked blocked in this environment, skip it entirely.
-- Do not waste time trying its CLI and do not fall back to WebSearch for that same blocked portal.
-- Record the skip reason so you can mention it in Step 5.
+- If a portal is marked blocked, skip it entirely.
+- If a portal is marked guarded/intermittent, run it conservatively and do not parallelise it aggressively.
+- Record the skip or guard reason so you can mention it in Step 5.
 
-#### 1a. Check bun availability
+#### 1a. Check runtime availability
 
-```bash
-bun --version
-```
+Use the local runtime available in this environment to execute the portal CLI. If the portal CLI cannot run here, skip to the fallback path for that portal and note the fallback in the Step 5 output.
 
-If this fails (bun not installed), skip to **1c (WebSearch fallback)** for all portals and note the fallback in the Step 5 output.
+#### 1b. Run CLI tools (primary — run these in parallel where possible, except guarded portals)
 
-#### 1b. Run CLI tools (primary — run these in parallel where possible)
-
-Discover all installed portal CLI skills by reading every `SKILL.md` found under `.agents/skills/*/SKILL.md`. Each file documents that portal's exact CLI flags and usage examples. Use each portal's own documented interface — do not guess flags. This approach automatically includes any new portals added via `/add-portal` without requiring changes to this file.
+Discover all installed portal CLI skills by reading every `SKILL.md` found under `.agents/skills/*/SKILL.md`. Each file documents that portal's exact CLI flags and usage examples. Use each portal's own documented interface — do not guess flags.
 
 For each installed portal skill that is not marked blocked in `NETWORK_ACCESS.md`:
 
-1. Read its `SKILL.md` to find the correct `bun run …` invocation and supported flags.
-2. Translate the query terms from `search-queries.md` into that portal's flag format (e.g. `--key`, `--search-string`, `--query`, filter codes — whatever the portal's SKILL.md specifies).
-3. Scope to the last 14 days using the portal's supported recency flag (`--jobage`, `--since <YYYY-MM-DD>`, `--order PublicationDate`, etc. — as documented per portal).
+1. Read its `SKILL.md` to find the correct invocation and supported flags.
+2. Translate the query terms from `search-queries.md` into that portal's flag format.
+3. Scope to the last 14 days using the portal's supported recency flag if available.
 4. Cap results to ~20 per call using the portal's limit flag.
-5. Use `--format json` for machine-readable output.
+5. Prefer machine-readable output (`json`) when available.
 
-Run all portal CLI calls in parallel where possible. Collect all `results` arrays into a single pool for Step 2.
+Run all portal CLI calls in parallel where safe. Treat guarded/intermittent portals conservatively and avoid parallel bursts.
 
 If a CLI tool exits with a non-zero code, log the error message and continue — do not abort the whole search.
 
-If the failure matches a known access block documented in `NETWORK_ACCESS.md` (for example Jobbank returning HTTP 403 / Cloudflare), mark that portal as skipped for the current run and do not retry it through other mechanisms.
+If the failure matches a known access block documented in `NETWORK_ACCESS.md`, mark that portal as skipped for the current run and do not retry it through other mechanisms.
 
-#### 1c. WebSearch fallback
+#### 1c. Fallback path
 
-Use WebSearch for:
-- Portals listed in `search-queries.md` that do **not** have a corresponding directory under `.agents/skills/`
-- Any portal whose CLI fails at runtime
-- When bun is unavailable (Step 1a failed)
+Use a fallback search mechanism only for portals that do not have a usable CLI or are otherwise unreachable from this environment.
 
-Use the site-specific query strings from `search-queries.md` directly as WebSearch queries for these portals.
-
-Never use WebSearch fallback for a portal already marked blocked in `NETWORK_ACCESS.md`.
+Never use fallback for a portal already marked blocked in `NETWORK_ACCESS.md`.
 
 ### Step 2: Fetch & Parse
 
 For each promising result from Step 1:
-- Use WebFetch to retrieve the job posting page
+- Use the portal's detail view or direct job page to retrieve the job posting
 - Extract: **job title**, **company**, **location**, **posting date** (or "recent"), **URL**, **key requirements** (brief), **application deadline** (if listed)
 - Skip if the URL or company+title combo already exists in `seen_jobs.json`
 - Skip if the company+role already appears in `job_search_tracker.csv`
 
 ### Step 3: Quick Fit Assessment
 
-For each new job, do a rapid fit check (not the full evaluation from `04-job-evaluation.md` - just a quick signal):
+For each new job, do a rapid fit check (not the full evaluation from the job-application-assistant workflow - just a quick signal):
 
 - **High match**: Role directly involves the candidate's core skills
 - **Medium match**: Role is adjacent to the candidate's experience
@@ -141,7 +132,7 @@ For each high-match job, add 2-3 bullet points:
 
 ### Skipped Portals
 - List any blocked portals you intentionally skipped based on `NETWORK_ACCESS.md`
-- Give the concrete reason, e.g. `Jobbank — skipped (blocked in this environment: HTTP 403 / Cloudflare)`
+- Give the concrete reason
 ```
 
 After presenting, ask:
@@ -149,7 +140,7 @@ After presenting, ask:
 
 If the user picks a number, invoke the job-application-assistant workflow (fit evaluation first, then CV + cover letter if approved).
 
-If the run found many new jobs (roughly 8+), also suggest `/rank` - it batch-scores all new postings against the full fit framework and returns a ranked shortlist, which beats eyeballing a long table. (`/rank` sets the `ranked` and `expired` status values in `seen_jobs.json`; treat both as already-seen for dedup purposes.)
+If the run found many new jobs (roughly 8+), also suggest `/rank`.
 
 ### Step 6: Update Tracker (Optional)
 
@@ -159,9 +150,9 @@ If the user decides to apply to any job, add a row to `job_search_tracker.csv`.
 
 ## Important Rules
 
-1. Never fabricate job postings. Only present jobs found via actual CLI/WebSearch/WebFetch results.
+1. Never fabricate job postings. Only present jobs found via actual CLI/fallback results.
 2. Respect deduplication. Always check `seen_jobs.json` AND `job_search_tracker.csv` before presenting.
 3. Focus on configured geographic area. Skip jobs that require relocation or are clearly outside commute range.
 4. Only open positions. Skip postings with expired deadlines or those marked as closed.
-5. Be efficient with WebFetch. Don't fetch every search result - use titles and snippets to pre-filter before fetching.
-6. Prefer parallel search where safe, but keep output grounded in real fetched results.
+5. Be efficient with fetching. Don't fetch every search result - use titles and snippets to pre-filter before fetching.
+6. Parallel searches are allowed only when the portal is not marked guarded/intermittent.
