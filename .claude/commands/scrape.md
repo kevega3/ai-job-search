@@ -41,10 +41,10 @@ Optional arguments:
 
 Read `search-queries.md` (this directory) for the search strategy. By default, run the top 3 priority query categories. If the user said `broad`, run all categories. If the user specified a focus area, prioritise queries from that category.
 
-Use the installed CLI tools as the primary search mechanism. Fall back to web search only for portals that do not have a CLI skill, or if the local runtime cannot execute the portal CLI.
+Use the installed CLI tools as the primary structured-search mechanism. They are not an allowlist: use WSL web research and Chromium as a complementary or fallback path for public job sites without a CLI, sites that need JavaScript rendering or interactive filters, and a CLI that cannot provide usable public results.
 
 Before running any portal, consult `NETWORK_ACCESS.md`:
-- If a portal is marked blocked, skip it entirely.
+- If a portal is marked blocked, skip its documented automated endpoint. You may make one conservative Chromium visit to its public page when it does not require bypassing an access control; if the public page is also blocked, record the reason and skip it.
 - If a portal is marked guarded/intermittent, run it conservatively and do not parallelise it aggressively.
 - Record the skip or guard reason so you can mention it in Step 5.
 
@@ -68,13 +68,11 @@ Run all portal CLI calls in parallel where safe. Treat guarded/intermittent port
 
 If a CLI tool exits with a non-zero code, log the error message and continue — do not abort the whole search.
 
-If the failure matches a known access block documented in `NETWORK_ACCESS.md`, mark that portal as skipped for the current run and do not retry it through other mechanisms.
+If the failure matches a known access block documented in `NETWORK_ACCESS.md`, do not retry the automated endpoint. A single conservative Chromium visit to a public page is permitted only to check whether an interactive/manual route is available without bypassing access controls; otherwise mark the portal as skipped for the current run.
 
 #### 1c. Fallback path
 
-Use a fallback search mechanism only for portals that do not have a usable CLI or are otherwise unreachable from this environment.
-
-Never use fallback for a portal already marked blocked in `NETWORK_ACCESS.md`.
+Use web research and Chromium as fallback mechanisms for portals that do not have a usable CLI, need interactive/JavaScript navigation, or are otherwise unreachable through their automated endpoint. Do not bypass logins, CAPTCHAs, paywalls, rate limits, or other access controls.
 
 ### Step 2: Fetch & Parse
 
@@ -150,7 +148,7 @@ If the user decides to apply to any job, add a row to `job_search_tracker.csv`.
 
 ## Important Rules
 
-1. Never fabricate job postings. Only present jobs found via actual CLI/fallback results.
+1. Never fabricate job postings. Only present jobs found via actual CLI, web-research, or Chromium results, with their source URL.
 2. Respect deduplication. Always check `seen_jobs.json` AND `job_search_tracker.csv` before presenting.
 3. Focus on configured geographic area. Skip jobs that require relocation or are clearly outside commute range.
 4. Only open positions. Skip postings with expired deadlines or those marked as closed.
