@@ -19,6 +19,7 @@ This fork is no longer just a straight Claude Code-era template. The following c
 - Job-search evaluation now supports real-world filters such as salary growth, remote-only / hybrid-in-Bogotá preference, and excluding roles that require English.
 - Blocked portals are documented in [NETWORK_ACCESS.md](NETWORK_ACCESS.md) and skipped automatically during scrape workflows.
 - LinkedIn guest search is actively usable in this environment and is the main source for country-agnostic searches.
+- This workspace can use WSL network tools and Chromium for public job-offer research beyond the bundled portal CLIs; the network matrix is an observation log, not an allowlist.
 - Application tracking is persisted in `job_search_tracker.csv`, and long-form review reports can be saved under `reports/`.
 
 <p align="center">

@@ -2,8 +2,14 @@
 
 This file documents the external sites and endpoints the repository needs for job-search workflows, plus their observed accessibility from this environment.
 
-Last verified: 2026-07-09
-Environment: WSL / current Hermes session
+Last verified: 2026-07-09 (portal endpoint matrix)
+Environment: WSL / current Hermes session, with authorized Chromium access for interactive research
+
+## Research scope
+
+The portal table is an observed endpoint-access matrix, not an allowlist. Job-search workflows may use WSL network tools and Chromium to discover and inspect public offers on any relevant site, including sites not yet catalogued here. Use Chromium when JavaScript rendering, interactive search, or manual navigation is necessary.
+
+This authorization covers browsing and researching offers. It does not authorize bypassing logins, CAPTCHAs, paywalls, rate limits, or other access controls, and it does not authorize submitting applications, creating accounts, or sending messages without explicit user confirmation.
 
 ## Summary
 

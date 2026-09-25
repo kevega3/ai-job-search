@@ -78,6 +78,8 @@ Helpful repository notes:
 - Supporting workflow knowledge: `.claude/skills/`
 - Job-portal CLIs: `.agents/skills/*/cli/`
 - Generated CVs land in `cv/`; generated cover letters land in `cover_letters/`
+- Research environment: WSL network tools and Chromium are authorized for public job-search research. Do not limit discovery to the shipped portal CLIs or `NETWORK_ACCESS.md`; use Chromium when JavaScript rendering or interactive navigation is needed.
+- Keep browsing within legitimate access: do not bypass logins, CAPTCHAs, paywalls, or other access controls. Browsing/research is authorized, but submitting applications, creating accounts, sending messages, or other external mutations require explicit user confirmation.
 
 When the workflow needs user confirmation or missing information, stop and ask instead of guessing.
 

@@ -32,6 +32,9 @@ class RunCodexWorkflowTests(unittest.TestCase):
         self.assertIn('You are OpenAI Codex running the `/apply` workflow', prompt)
         self.assertIn('User arguments: https://example.com/job/1', prompt)
         self.assertIn('CLAUDE.md', prompt)
+        self.assertIn('WSL network tools and Chromium are authorized', prompt)
+        self.assertIn('Do not limit discovery to the shipped portal CLIs', prompt)
+        self.assertIn('do not bypass logins, CAPTCHAs, paywalls', prompt)
         self.assertIn(spec_text, prompt)
 
     def test_bin_wrappers_exist(self):

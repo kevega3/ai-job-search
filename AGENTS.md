@@ -37,6 +37,14 @@ Treat those names as backwards-compatible storage, not as a requirement to use C
 - Verify generated LaTeX with `lualatex` for CVs and `xelatex` for cover letters.
 - `salary_lookup.py` is optional and only works when `salary_data.json` is present.
 
+## Job-search research environment
+
+- This workspace runs in WSL and has authorized access to Chromium for interactive web research.
+- When a job-search task needs it, use WSL network tools and Chromium to freely navigate and research public job sites; do not limit discovery to the portal CLIs or the sites listed in `NETWORK_ACCESS.md`.
+- Use the browser when a portal needs JavaScript rendering, interactive search, or a manual reading path that the CLI cannot provide. Record the source URL and verify the posting details before recommending it.
+- A login wall, CAPTCHA, paywall, or a portal's access controls are not authorization to bypass them. Ask the user to authenticate or provide the posting text when needed.
+- Browsing and researching offers is authorized. Submitting applications, creating accounts, sending messages, or otherwise changing an external service still requires explicit user confirmation.
+
 ## Quality bar
 
 - Do not fabricate profile facts or company research.
